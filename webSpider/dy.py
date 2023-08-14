@@ -35,6 +35,4 @@ def download(video_url: str = None):
 
 
 if __name__ == "__main__":
-    # checkIn()
-    # getUserInfo()
     getDownloadUrl("https://v.douyin.com/iJPv8dAB/")
