@@ -7,9 +7,9 @@ def generateExcel():
     wb = Workbook()
     # 创建了一个用户信息表并放在第一位
     ws = wb.create_sheet('用户信息表', 0)
-    #设置A1的列宽
+    #设置A列的宽
     ws.column_dimensions["A"].width = 30
-    #设置A1的行高
+    #设置第1行的高
     ws.row_dimensions[1].height = 20
 
     #指定位置赋值
