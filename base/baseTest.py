@@ -4,14 +4,14 @@ import keyword
 print(keyword.kwlist)
 """
 多行注释
-Python 中有六个标准的数据类型：
 
+Python 中有六个标准的数据类型：
 Number  数字
 String  字符串
 List    列表    [1,2,3]
-Tuple   元组    (1,2,3)
-Set     集合    
-Dictionary  字典
+Tuple   元组    (1,2,3)             #元素不能修改
+Set     集合    {'Alice','3258'}    #无序、不重复
+Dictionary  字典{'Alice': '2341', 'Beth': '9102', 'Cecil': '3258'}
 Python3 的六个标准数据类型中：
 
 不可变数据:Number、String、Tuple
