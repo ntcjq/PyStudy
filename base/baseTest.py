@@ -12,10 +12,11 @@ List    列表    [1,2,3]
 Tuple   元组    (1,2,3)             #元素不能修改
 Set     集合    {'Alice','3258'}    #无序、不重复
 Dictionary  字典{'Alice': '2341', 'Beth': '9102', 'Cecil': '3258'}
-Python3 的六个标准数据类型中：
 
+Python3 的六个标准数据类型中：
 不可变数据:Number、String、Tuple
 可变数据:List、Dictionary、Set
+
 """
 '''
 多行注释
