@@ -1,25 +1,22 @@
-from flask import Flask
+from flask import Flask, render_template
+import requests
+from bs4 import BeautifulSoup
+import json
+from apps.inn.inn import inn_blue
+from apps.test.test import test_blue
+
 # 创建应用实例
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates', static_folder='static')
+
+#将蓝图注册到app中
+app.register_blueprint(inn_blue)
+app.register_blueprint(test_blue)
 
 
 # 视图函数（路由）
-@app.route("/")
+@app.route("/", methods=['GET'])
 def hello_world():
     return "Hello, World!"
-
-
-@app.route("/user/list")
-def userList():
-    return ["cjq","ssn","hyh"]
-
-@app.route("/username/<username>")
-def username(username):
-    return f'Hello {username}'
-
-@app.route("/userId/<int:userId>")
-def userId(userId):
-    return f'Hello {userId}'
 
 
 # 启动服务
