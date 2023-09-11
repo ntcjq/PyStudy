@@ -31,7 +31,7 @@ def template():
     dict_ = {'name': 'Kint', 'age': 23}
     # render_template方法:渲染模板
     # 参数1: 模板名称  参数n: 传到模板里的数据
-    return render_template('template.html',
+    return render_template('test/template.html',
                            my_int=int_,
                            my_str=str_,
                            my_list=list_,
