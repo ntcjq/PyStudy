@@ -12,9 +12,12 @@ inn_blue = Blueprint('inn', __name__)
 def ui():
     return render_template('inn/ui.html')
 
+
 @inn_blue.route('/register')
 def register():
     result = {}
-    result['x'] = ['2023-07-01','2023-07-02','2023-07-03','2023-07-04','2023-07-05']
-    result['y'] = [10,20,30,35,36]
+    result['x'] = [
+        '2023-07-01', '2023-07-02', '2023-07-03', '2023-07-04', '2023-07-05'
+    ]
+    result['y'] = [10, 20, 30, 35, 36]
     return json.dumps(result)
