@@ -21,6 +21,7 @@ def getTitles(url):
     tbodys = table.find_all("tbody", id=re.compile("^normalthread"))
     for t in tbodys:
         th = t.find("th", class_="common")
+        # th = t.find("label", string=re.compile(".*爱家.*"))
         if th is not None:
             a = th.find("a")
             if a is not None:
