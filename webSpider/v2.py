@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 def main():
     header = {}
-    proxy = {"http":"127.0.0.1:1087","https":"127.0.0.1:1087"}
+    proxy = {"http":"127.0.0.1:7890","https":"127.0.0.1:7890"}
     header[
         'User-Agent'] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
     req = requests.get("https://www.v2ex.com/",headers=header,proxies=proxy)
