@@ -1,39 +1,46 @@
 import requests
 from bs4 import BeautifulSoup
 import re
-import socks
-import socket
+import time
 
-# 设置Socks5代理
-# 这里的地址和端口请替换为你的Socks5代理地址和端口
-socks.set_default_proxy(socks.SOCKS5, "127.0.0.1", 7890)
-socket.socket = socks.socksocket  # 将Python的socket对象替换为Socks的socket对象
+domain = ""
 
+cookies = {
+ 
+}
+
+proxy = {"http":"127.0.0.1:7890","https":"127.0.0.1:7890"}
+
+header = {
+    "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+}
 
 def start():
-    for i in range(13):
-        index = i + 1
-        url = f"https://www.google.com/search?q=python"
+    for i in range(1):
+        page = i + 1 + 10
+        collect(str(page))
+        time.sleep(2)  # 休眠2秒钟
 
-
-def collect():
-    url = f"https://www.google.com/search?q=python"
-    header = {
-    }
-    response = requests.get(url, headers=header)
+def collect(page):
+    
+    timestamp = int(round(time.time()*1000))
+    # print(timestamp)
+    url = domain + '/my/favourites/videos/?mode=async&function=get_block&block_id=list_videos_my_favourite_videos&fav_type=0&playlist_id=0&sort_by=&from_my_fav_videos='+page+'&_='+str(timestamp)
+    # print(url)
+  
+    response = requests.get(url, cookies=cookies,proxies=proxy,headers=header)
     bs = BeautifulSoup(response.text, features="html.parser")
-    # table = bs.find("table", attrs={"class": "jmjoTe"})
-    table = bs.find("table")
-    trs = table.find_all("tr")
-    for t in trs:
-        th = t.find("a")
-        if th is not None:
-            a = th.find("a")
+    divF = bs.find("div", attrs={"class": "gutter-20"})
+    boxes = divF.find_all("div", attrs={"class": "video-img-box"})
+    for box in boxes:
+        detailDiv = box.find("div", attrs={"class": "detail"})
+        if detailDiv is not None:
+            a = detailDiv.find("a")
             if a is not None:
                 title = a.text
                 href = a['href']
-                print(title, href)
+                print(title)
 
 
 if __name__ == "__main__":
-    collect()
+   start()
