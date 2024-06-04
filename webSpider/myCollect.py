@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import time
+import random
+from tenacity import retry, stop_after_attempt, wait_fixed
 
 domain = ""
 
@@ -15,14 +17,20 @@ header = {
 
 
 def start():
-    for i in range(1):
-        page = i + 1 + 10
+    retry = 0
+    for i in range(16):
+        page = i + 1
         collect(str(page))
-        time.sleep(2)  # 休眠2秒钟
+        delay()
 
 
+def delay():
+    delay = random.uniform(1, 5)  # 生成1到5的随机数
+    time.sleep(delay)
+
+
+@retry(stop=stop_after_attempt(3), wait=wait_fixed(10))
 def collect(page):
-
     timestamp = int(round(time.time() * 1000))
     # print(timestamp)
     url = (
@@ -33,8 +41,15 @@ def collect(page):
         + str(timestamp)
     )
     # print(url)
-
     response = requests.get(url, cookies=cookies, proxies=proxy, headers=header)
+    if response.status_code == 200:
+        parseResp(response)
+    else:
+        print("Something went wrong!,retrying...")
+        raise ValueError("Something went wrong!")
+
+
+def parseResp(response):
     bs = BeautifulSoup(response.text, features="html.parser")
     divF = bs.find("div", attrs={"class": "gutter-20"})
     boxes = divF.find_all("div", attrs={"class": "video-img-box"})
