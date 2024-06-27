@@ -25,6 +25,7 @@ def search(songName, author):
         songNameTemp = None
         authorTemp = None
         fileName = None
+        # 查找完全匹配的一首
         for index, div in enumerate(divs):
             if index != 0:
                 a = div.find("a", class_="text-primary font-weight-bold")
@@ -37,7 +38,8 @@ def search(songName, author):
                 if authorTemp == author and songNameTemp == songName:
                     fileName = f"{author}-{songName}.mp3"
                     break
-        getDownloadUrl(mp3Id, fileName)
+        if mp3Id is not None and fileName is not None:
+            getDownloadUrl(mp3Id, fileName)
     else:
         print(f"请求异常:{author}-{songName}")
 
@@ -63,6 +65,7 @@ def searchByAuthor(author):
                     mp3Id = a.attrs["href"].split("/")[2]
                 if authorDiv is not None:
                     authorTemp = authorDiv.text.strip()
+                # 包含以下内容的直接跳过
                 if (
                     authorTemp != author
                     or songNameTemp is None
